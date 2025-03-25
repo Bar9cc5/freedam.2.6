@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Главная</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="mobile-header">
+                <button class="menu-toggle">☰</button>
+                <h1><span>F</span>reedam</h1>
+                <form id="searchForm">
+                    <input type="text" id="searchInput" placeholder="Поиск">
+                </form>
+            </div>
+        </div>
+        <div id="searchResults"></div>
+        <div class="line"></div>
+    </header>    
+    <section>
+        <nav class="navbar" id="navbar">
+            <a href="#profile" class="nav-item">
+                <img src="img-1.png" alt="Profile" class="icon">
+                <span class="label">Профиль</span>
+            </a>
+            <a href="#feed" class="nav-item">
+                <img src="img-2.png" alt="Home" class="icon">
+                <span class="label">Главная</span>
+            </a>
+            <a href="#messenger" class="nav-item">
+                <img src="img-3.png" alt="Messenger" class="icon">
+                <span class="label">Мессенджер</span>
+            </a>
+            <a href="#friends" class="nav-item">
+                <img src="img-4.png" alt="Friends" class="icon">
+                <span class="label">Друзья</span>
+            </a>
+            <a href="#communities" class="nav-item">
+                <img src="img-5.png" alt="Communities" class="icon">
+                <span class="label">Сообщества</span>
+            </a>
+            <a href="#photos" class="nav-item">
+                <img src="img-6.png" alt="Photos" class="icon">
+                <span class="label">Фотографии</span>
+            </a>
+            <a href="#videos" class="nav-item">
+                <img src="img-7.png" alt="Videos" class="icon">
+                <span class="label">Видео</span>
+            </a>
+            <a href="#games" class="nav-item" id="games-link">
+                <img src="img-8.png" alt="Play" class="icon">
+                <span class="label">Игры</span>
+            </a>
+        </nav>
+        
+        <!-- Секция с играми -->
+        <div class="games-section" id="games-section">
+            <h2>Игры</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="icon-80.png" alt="Game Icon" class="game-icon">
+                    <div class="game-title">Угадай исполнителя</div>
+                    <a href="play-main.html" class="play-button">Играть</a>
+                </div>
+                <!-- Можно добавить больше игр здесь -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Открытие/закрытие мобильного меню (только для мобильных устройств)
+        document.querySelector('.menu-toggle').addEventListener('click', function(e) {
+            e.stopPropagation(); // Предотвращаем всплытие события
+            document.getElementById('navbar').classList.toggle('active');
+        });
+
+        // Переключение раздела игр
+        document.getElementById('games-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('games-section').classList.toggle('active');
+        });
+
+        // Закрытие меню при клике вне его области (только для мобильных устройств)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768) {
+                const navbar = document.getElementById('navbar');
+                const menuToggle = document.querySelector('.menu-toggle');
+                
+                if (!navbar.contains(e.target) && e.target !== menuToggle) {
+                    navbar.classList.remove('active');
+                }
+            }
+        });
+
+        // Адаптация отступа для контента при изменении размера окна
+        window.addEventListener('resize', function() {
+            const gamesSection = document.getElementById('games-section');
+            if (window.innerWidth > 768) {
+                gamesSection.style.marginLeft = '220px';
+            } else {
+                gamesSection.style.marginLeft = '0';
+            }
+        });
+
+        // Инициализация положения меню при загрузке
+        window.addEventListener('DOMContentLoaded', function() {
+            const gamesSection = document.getElementById('games-section');
+            if (window.innerWidth > 768) {
+                gamesSection.style.marginLeft = '220px';
+            } else {
+                gamesSection.style.marginLeft = '0';
+            }
+        });
+    </script>
+</body>
+</html>
